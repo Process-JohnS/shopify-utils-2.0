@@ -1,8 +1,22 @@
 
 import { ShopifyConnector } from './connectors/shopify-connector';
 import { QueryDecorator } from './decorators/query-decorator';
-import { DiscountDecorator } from './decorators/discount-decorator';
 import { FetchDecorator } from './decorators/fetch-decorator';
+
+import { CustomComponent } from './resource-components/custom-component';
+import { ResourceIterator } from './iterators/iterator';
+
+
+
+
+const createComponents = () => {
+  let components = [];
+  for (let i = 0; i < 200; i++) {
+    components.push(new CustomComponent(i.toString()));
+  }
+  return components;
+}
+
 
 
 const main = async () => {
@@ -21,6 +35,40 @@ const main = async () => {
   // let discountDecorator = new DiscountDecorator(shopifyConnection);
   // console.log(await discountDecorator.getPriceRules());
   console.log(await queryConnector.countProducts());
+
+
+
+
+
+  let components = createComponents();
+  let iter = new ResourceIterator<CustomComponent>(components);
+
+
+  let promise = new Promise((resolve) => {
+
+    let doCallBurst = () => {
+      for (let i = 0; i < 10; i++) {
+
+        let next = iter.next();
+        let component = <CustomComponent>next.value;
+        let done = next.done;
+
+        if (done) return resolve('Done');
+
+        console.log(component);
+      }
+    }
+
+    for (let i = 0; i < 50; i++) doCallBurst();
+  });
+
+
+  try {
+    let result = await promise;
+    console.log(result);
+  } catch (e) {
+    console.error(e.message);
+  }
 
 }
 
