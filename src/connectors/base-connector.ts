@@ -1,6 +1,6 @@
 
 
-export interface Connector<T> {
+export interface BaseConnector<T> {
   conn: T;
   getConnection(): T;
 }

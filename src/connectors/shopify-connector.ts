@@ -1,9 +1,9 @@
 
 import Shopify from 'shopify-api-node';
-import { Connector } from './connector';
+import { BaseConnector } from './base-connector';
 
 
-export class ShopifyConnector implements Connector<Shopify> {
+export class ShopifyConnector implements BaseConnector<Shopify> {
 
   static readonly callLimitPollDelayMillis: number = 500;
   static readonly pollDelayMillis: number = 3000;

@@ -29,7 +29,9 @@ const main = async () => {
 
   let fetchDecorator = new FetchDecorator(shopifyConnection);
   let resources = await fetchDecorator.getCustomers();
-  console.log(resources);
+  console.log(resources.length);
+
+  // process.exit();
 
   let queryConnector = new QueryDecorator(shopifyConnection);
   // let discountDecorator = new DiscountDecorator(shopifyConnection);

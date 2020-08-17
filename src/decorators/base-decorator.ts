@@ -7,18 +7,18 @@ import { ShopifyConnector } from '../connectors/shopify-connector';
 
 export class BaseDecorator {
   protected shop: Shopify = null;
+  protected fetchLimit: number = 250;
 
   constructor(conn: ShopifyConnector) {
     this.shop = conn.getConnection();
   }
 
-  protected async fetchResource(call: any, params: any = {}): Promise<any[]> {
+  protected async fetchResource(call: any, params: any): Promise<any[]> {
     let resourceList = [];
     try {
       const resourceCount = await this.shop.product.count();
-      const fetchLimit = 250;
-      for (let page = 1; page <= Math.ceil(resourceCount / fetchLimit); page++) {
-        let resourceBatch = await call.list({ ...params, limit: fetchLimit, page });
+      for (let page = 1; page <= Math.ceil(resourceCount / this.fetchLimit); page++) {
+        let resourceBatch = await call.list({ ...params, limit: this.fetchLimit, page });
         resourceList.push(...resourceBatch);
       }
     } catch (err) {
