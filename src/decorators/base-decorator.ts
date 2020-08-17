@@ -9,8 +9,8 @@ export class BaseDecorator {
   protected shop: Shopify = null;
   protected fetchLimit: number = 250;
 
-  constructor(conn: ShopifyConnector) {
-    this.shop = conn.getConnection();
+  constructor(connector: ShopifyConnector) {
+    this.shop = connector.getConnection();
   }
 
   protected async fetchResource(call: any, params: any): Promise<any[]> {

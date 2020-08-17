@@ -1,7 +1,7 @@
 
 
 export interface BaseConnector<T> {
-  conn: T;
+  _conn: T;
   getConnection(): T;
 }
 

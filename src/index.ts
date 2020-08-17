@@ -28,7 +28,7 @@ const main = async () => {
   });
 
   let fetchDecorator = new FetchDecorator(shopifyConnection);
-  let resources = await fetchDecorator.getCustomers();
+  let resources = await fetchDecorator.getProducts();
   console.log(resources.length);
 
   // process.exit();
@@ -41,6 +41,8 @@ const main = async () => {
 
 
 
+
+  /* Burst Uploader Code */
 
   let components = createComponents();
   let iter = new ResourceIterator<CustomComponent>(components);
