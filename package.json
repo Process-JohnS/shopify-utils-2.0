@@ -1,8 +1,12 @@
 {
   "dependencies": {
     "@types/fast-levenshtein": "^0.0.1",
+    "@types/fs-extra": "^9.0.1",
     "@types/node": "^14.0.27",
+    "@types/nodegit": "^0.26.7",
     "fast-levenshtein": "^3.0.0",
+    "fs-extra": "^9.0.1",
+    "nodegit": "^0.27.0",
     "shopify-api-node": "^3.4.3",
     "split-string": "^6.1.0",
     "ts-node": "^8.10.2",

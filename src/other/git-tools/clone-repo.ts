@@ -1,8 +1,9 @@
 
-
 import { Clone, Cred, Repository } from 'nodegit';
 import * as fs from 'fs-extra';
 import { existsSync } from 'fs-extra';
+
+
 
 const username = 'Process-JohnS';
 const password = 'nrR?Hrx3*CP4';
@@ -27,16 +28,6 @@ export type DeployParams = {
 
 
 
-let cloneOptions = {
-  fetchOpts: {
-    callbacks: {
-      credentials: () => {
-        let userpassPlaintextNew = Cred.userpassPlaintextNew
-        return userpassPlaintextNew(username, password);
-      }
-    }
-  }
-}
 
 
 
@@ -47,6 +38,12 @@ export const cloneRepo = async (repoName: string) => {
     console.error('Clone directory already exists');
     return repo;
   }
+
+  const cloneOptions = {
+    fetchOpts: { callbacks: {
+        credentials: () => Cred.userpassPlaintextNew(username, password)
+    }}
+  };
 
   let gitUrl = `${protocol}://${gitDomain}/${gitOwner}/${repoName}.git`;
 
@@ -72,13 +69,12 @@ export const cloneRepo = async (repoName: string) => {
 
 
 
-
-
 export const createDeployFile = (type: DeployType, { shopName, shopPassword, themeId }: DeployParams) => {
   let deployFileContents: string;
 
   switch (type) {
 
+    /* .env */
     case DeployType.ENV:
       deployFileContents =
       `SLATE_STORE=${shopName}.myshopify.com\n` +
@@ -87,6 +83,7 @@ export const createDeployFile = (type: DeployType, { shopName, shopPassword, the
       `SLATE_IGNORE_FILES=src/config/settings_data.json\n`;
       break;
 
+    /* config.yml*/
     case DeployType.YML:
       deployFileContents =
       `development:\n` +
@@ -99,10 +96,9 @@ export const createDeployFile = (type: DeployType, { shopName, shopPassword, the
 
     default:
       console.log('Error: Unknown deploy type');
-
   }
 
-  let deployFilePath = shopName + '/' + type;
+  let deployFilePath = `${shopName}/${type}`;
 
   if (!existsSync(deployFilePath)) {
     fs.writeFileSync(deployFilePath, deployFileContents);

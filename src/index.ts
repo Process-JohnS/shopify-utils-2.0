@@ -7,6 +7,10 @@ import { CustomComponent } from './resource-components/custom-component';
 import { ResourceIterator } from './iterators/iterator';
 
 
+import { cloneRepo, createDeployFile, DeployType, DeployParams } from './other/git-tools/clone-repo';
+
+
+import { requestPackageJson } from './other/git-tools/read-package';
 
 
 const createComponents = () => {
@@ -73,6 +77,25 @@ const main = async () => {
   } catch (e) {
     console.error(e.message);
   }
+
+
+  try {
+    let result = await requestPackageJson('slh-au');
+    console.log(result);
+  }
+  catch (e) {
+    console.error(e.message);
+  }
+
+
+  let repo = await cloneRepo('Steele');
+  createDeployFile(DeployType.ENV, <DeployParams>{
+    shopName: 'Steele',
+    shopPassword: 'XXX',
+    themeId: 'XXX'
+  })
+  console.log(repo);
+
 
 }
 
