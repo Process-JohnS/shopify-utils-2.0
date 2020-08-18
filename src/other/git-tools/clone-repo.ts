@@ -27,10 +27,6 @@ export type DeployParams = {
 
 
 
-
-
-
-
 export const cloneRepo = async (repoName: string) => {
   let repo: Repository;
 
@@ -52,16 +48,9 @@ export const cloneRepo = async (repoName: string) => {
     console.log(`${repoName} cloned`);
   }
   catch (e) {
-    switch (e.errno) {
-      case -4:
-        console.error(`Error: Output directory ${repoName} already exists`);
-        break;
-      case -1:
-        console.error(`Error: Remote authentication required`);
-        break;
-      default:
-        console.error(e);
-    }
+    if (e.errno === -4) console.error(`Error: Output directory ${repoName} already exists`);
+    else if (e.errno === -1) console.error(`Error: Remote authentication required`);
+    else console.error(e);
   }
 
   return repo;
@@ -69,7 +58,7 @@ export const cloneRepo = async (repoName: string) => {
 
 
 
-export const createDeployFile = (type: DeployType, { shopName, shopPassword, themeId }: DeployParams) => {
+export const createDeployFile = (type: DeployType, { shopName, shopPassword, themeId }: DeployParams): void => {
   let deployFileContents: string;
 
   switch (type) {
@@ -96,6 +85,7 @@ export const createDeployFile = (type: DeployType, { shopName, shopPassword, the
 
     default:
       console.log('Error: Unknown deploy type');
+      return;
   }
 
   let deployFilePath = `${shopName}/${type}`;
