@@ -1,0 +1,2 @@
+
+const secretKey = 'abc123';
