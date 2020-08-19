@@ -71,33 +71,31 @@ const main = async () => {
   });
 
 
+  // try {
+  //   let result = await promise;
+  //   console.log(result);
+  // } catch (e) {
+  //   console.error(e.message);
+  // }
+
+
+  // let repo = await cloneRepo('Steele');
+  // createDeployFile(DeployType.ENV, <DeployParams>{
+  //   shopName: 'Steele',
+  //   shopPassword: 'XXX',
+  //   themeId: 'XXX'
+  // })
+  // console.log(repo);
+
+
   try {
-    let result = await promise;
-    console.log(result);
-  } catch (e) {
-    console.error(e.message);
-  }
-
-
-  let repo = await cloneRepo('Steele');
-  createDeployFile(DeployType.ENV, <DeployParams>{
-    shopName: 'Steele',
-    shopPassword: 'XXX',
-    themeId: 'XXX'
-  })
-  console.log(repo);
-
-
-  try {
-    let packageJson = await requestPackageJson('slh-au');
+    let packageJson = await requestPackageJson('steele');
     console.log(packageJson);
   }
   catch (e) {
     console.error(e.message);
   }
 
-
-  
 
 
 }
