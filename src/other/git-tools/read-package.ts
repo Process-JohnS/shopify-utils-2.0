@@ -21,7 +21,7 @@ export const requestPackageJson = (shopName: string) => {
 
             /* Reject on bad status */
             if (response.statusCode !== 200) {
-                reject(new Error(`Bad status: ${response.statusCode} (no package.json or incorrect repo name)`));
+                reject(new Error(`Bad status: ${response.statusCode} (no package.json, incorrect repo name, or access token revoked)`));
             }
 
             /* Cumulate data */
