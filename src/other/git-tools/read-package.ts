@@ -1,10 +1,7 @@
 
 import https from 'https';
 import { IncomingMessage } from 'http';
-
-
-
-const personalAccessToken = '02f30c4c10f1f601503ff29d1279b9b7a009d857';
+import { personalAccessToken } from './../../config';
 
 
 
