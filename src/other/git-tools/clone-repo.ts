@@ -4,14 +4,12 @@ import * as fs from 'fs-extra';
 import { existsSync } from 'fs-extra';
 
 
-
 const username = 'Process-JohnS';
 const password = 'nrR?Hrx3*CP4';
 
 const protocol = 'https';
 const gitDomain = 'github.com';
 const gitOwner = 'Process-Creative';
-
 
 
 export enum DeployType {
@@ -24,7 +22,6 @@ export type DeployParams = {
   shopPassword: string,
   themeId: string
 };
-
 
 
 export const cloneRepo = async (repoName: string) => {
@@ -55,7 +52,6 @@ export const cloneRepo = async (repoName: string) => {
 
   return repo;
 }
-
 
 
 export const createDeployFile = (type: DeployType, { shopName, shopPassword, themeId }: DeployParams): void => {

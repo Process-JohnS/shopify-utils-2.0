@@ -10,7 +10,7 @@ import { ResourceIterator } from './iterators/iterator';
 import { cloneRepo, createDeployFile, DeployType, DeployParams } from './other/git-tools/clone-repo';
 
 
-import { requestPackageJson } from './other/git-tools/read-package';
+import { getPackageJson, getSlateVersion } from './other/git-tools/read-package';
 
 
 const createComponents = () => {
@@ -24,6 +24,23 @@ const createComponents = () => {
 
 
 const main = async () => {
+
+  try {
+
+    let packageJson = await getPackageJson('max-black');
+    let slateVersion = getSlateVersion(packageJson);
+    console.log(slateVersion);
+
+  }
+  catch (e) {
+    console.error(e.message);
+  }
+
+
+
+  process.exit();
+
+
 
   let shopifyConnection = new ShopifyConnector({
     shopName: 'helly-hansen-nz.myshopify.com',
@@ -86,15 +103,6 @@ const main = async () => {
   //   themeId: 'XXX'
   // })
   // console.log(repo);
-
-
-  try {
-    let packageJson = await requestPackageJson('steele');
-    console.log(packageJson);
-  }
-  catch (e) {
-    console.error(e.message);
-  }
 
 
 

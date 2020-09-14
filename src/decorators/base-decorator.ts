@@ -4,7 +4,6 @@ import { ShopifyConnector } from '../connectors/shopify-connector';
 
 
 
-
 export class BaseDecorator {
   protected shop: Shopify = null;
   protected fetchLimit: number = 250;
@@ -13,7 +12,7 @@ export class BaseDecorator {
     this.shop = connector.getConnection();
   }
 
-  protected async fetchResource(call: any, params: any): Promise<any[]> {
+  protected async fetchResource(call: any, params?: any): Promise<any[]> {
     let resourceList = [];
     try {
       const resourceCount = await this.shop.product.count();
