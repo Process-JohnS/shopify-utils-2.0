@@ -1,3 +1,0 @@
-# Files that are going to be encrypted
-src/config.ts filter=git-crypt diff=git-crypt
-.gitattributes !filter !diff
