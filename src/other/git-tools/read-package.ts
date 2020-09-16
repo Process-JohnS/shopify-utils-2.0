@@ -4,7 +4,7 @@ import { IncomingMessage } from 'http';
 import { personalAccessToken } from './../../config';
 
 
-enum SlateVersion {
+export enum SlateVersion {
     V0 = 'Slate v0',
     V1 = 'Slate v1',
     V2 = 'Slate v2'

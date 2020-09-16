@@ -8,6 +8,7 @@ import { ResourceIterator } from './iterators/iterator';
 
 
 import { cloneRepo, createDeployFile, DeployType, DeployParams } from './other/git-tools/clone-repo';
+import { SlateVersion } from './other/git-tools/read-package';
 
 
 import { getPackageJson, getSlateVersion } from './other/git-tools/read-package';
@@ -27,9 +28,22 @@ const main = async () => {
 
   try {
 
-    let packageJson = await getPackageJson('max-black');
+    const storeName = 'O-M';
+    let packageJson = await getPackageJson(storeName);
     let slateVersion = getSlateVersion(packageJson);
     console.log(slateVersion);
+
+    await cloneRepo(storeName);
+    const storeCredentials = {
+      shopName: storeName,
+      shopPassword: 'XXX',
+      themeId: 'XXX'
+    };
+    if (slateVersion == SlateVersion.V0) {
+      createDeployFile(DeployType.YML, storeCredentials);
+    } else if (slateVersion == SlateVersion.V1) {
+      createDeployFile(DeployType.ENV, storeCredentials);
+    }
 
   }
   catch (e) {
