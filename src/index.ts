@@ -24,7 +24,7 @@ const createComponents = () => {
 
 
 
-const main = async () => {
+const readAndClone = async () => {
 
   try {
 
@@ -44,39 +44,16 @@ const main = async () => {
     } else if (slateVersion == SlateVersion.V1) {
       createDeployFile(DeployType.ENV, storeCredentials);
     }
-
   }
   catch (e) {
     console.error(e.message);
   }
 
-
-
-  process.exit();
-
-
-
-  let shopifyConnection = new ShopifyConnector({
-    shopName: 'helly-hansen-nz.myshopify.com',
-    apiKey: '966ba4d2b8bfdc3daec9b41aa512f126',
-    password: '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'
-  });
-
-  let fetchDecorator = new FetchDecorator(shopifyConnection);
-  let resources = await fetchDecorator.getProducts();
-  console.log(resources.length);
-
-  // process.exit();
-
-  let queryConnector = new QueryDecorator(shopifyConnection);
-  // let discountDecorator = new DiscountDecorator(shopifyConnection);
-  // console.log(await discountDecorator.getPriceRules());
-  console.log(await queryConnector.countProducts());
+}
 
 
 
-
-
+const burstUploaderDemo = async () => {
   /* Burst Uploader Code */
 
   let components = createComponents();
@@ -102,21 +79,37 @@ const main = async () => {
   });
 
 
-  // try {
-  //   let result = await promise;
-  //   console.log(result);
-  // } catch (e) {
-  //   console.error(e.message);
-  // }
+  try {
+    let result = await promise;
+    console.log(result);
+  } catch (e) {
+    console.error(e.message);
+  }
 
 
-  // let repo = await cloneRepo('Steele');
-  // createDeployFile(DeployType.ENV, <DeployParams>{
-  //   shopName: 'Steele',
-  //   shopPassword: 'XXX',
-  //   themeId: 'XXX'
-  // })
-  // console.log(repo);
+}
+
+
+
+
+const main = async () => {
+
+
+  let shopifyConnection = new ShopifyConnector({
+    shopName: 'helly-hansen-nz.myshopify.com',
+    apiKey: '966ba4d2b8bfdc3daec9b41aa512f126',
+    password: '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'
+  });
+
+  let fetchDecorator = new FetchDecorator(shopifyConnection);
+  let resources = await fetchDecorator.getProducts();
+  console.log(resources.length);
+
+
+  let queryConnector = new QueryDecorator(shopifyConnection);
+  // let discountDecorator = new DiscountDecorator(shopifyConnection);
+  // console.log(await discountDecorator.getPriceRules());
+  console.log(await queryConnector.countProducts());
 
 
 
