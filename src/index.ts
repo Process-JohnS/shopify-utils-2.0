@@ -26,33 +26,33 @@ const createComponents = () => {
 
 const main = async () => {
 
-  try {
+  // try {
 
-    const storeName = 'O-M';
-    let packageJson = await getPackageJson(storeName);
-    let slateVersion = getSlateVersion(packageJson);
-    console.log(slateVersion);
+  //   const storeName = 'O-M';
+  //   let packageJson = await getPackageJson(storeName);
+  //   let slateVersion = getSlateVersion(packageJson);
+  //   console.log(slateVersion);
 
-    await cloneRepo(storeName);
-    const storeCredentials = {
-      shopName: storeName,
-      shopPassword: 'XXX',
-      themeId: 'XXX'
-    };
-    if (slateVersion == SlateVersion.V0) {
-      createDeployFile(DeployType.YML, storeCredentials);
-    } else if (slateVersion == SlateVersion.V1) {
-      createDeployFile(DeployType.ENV, storeCredentials);
-    }
+  //   await cloneRepo(storeName);
+  //   const storeCredentials = {
+  //     shopName: storeName,
+  //     shopPassword: 'XXX',
+  //     themeId: 'XXX'
+  //   };
+  //   if (slateVersion == SlateVersion.V0) {
+  //     createDeployFile(DeployType.YML, storeCredentials);
+  //   } else if (slateVersion == SlateVersion.V1) {
+  //     createDeployFile(DeployType.ENV, storeCredentials);
+  //   }
 
-  }
-  catch (e) {
-    console.error(e.message);
-  }
+  // }
+  // catch (e) {
+  //   console.error(e.message);
+  // }
 
 
 
-  process.exit();
+  // process.exit();
 
 
 
